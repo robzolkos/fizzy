@@ -25,7 +25,4 @@
   <%= render "bubbles/bubble", bubble: @bubble %>
 </div>
 
-<section class="comments align-center center borderless margin flex flex-column gap-half" style="--bubble-color: <%= @bubble.color %>;">
-  <%= render_comments_and_boosts(@bubble) %>
-  <%= render "comments/new", bubble: @bubble %>
-</section>
+<%= render @bubble.thread %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_10_02_163242) do
+ActiveRecord::Schema[8.0].define(version: 2024_10_09_211414) do
   create_table "accesses", force: :cascade do |t|
     t.integer "bucket_id", null: false
     t.integer "user_id", null: false
@@ -64,16 +64,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_10_02_163242) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "assigner_id", null: false
-    t.index ["assignee_id"], name: "index_assignments_on_assignee_id"
+    t.index ["assignee_id", "bubble_id"], name: "index_assignments_on_assignee_id_and_bubble_id", unique: true
     t.index ["bubble_id"], name: "index_assignments_on_bubble_id"
-  end
-
-  create_table "boosts", force: :cascade do |t|
-    t.integer "creator_id", null: false
-    t.integer "bubble_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["bubble_id"], name: "index_boosts_on_bubble_id"
   end
 
   create_table "bubbles", force: :cascade do |t|
@@ -84,6 +76,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_10_02_163242) do
     t.integer "creator_id", null: false
     t.date "due_on"
     t.integer "bucket_id", null: false
+    t.integer "boost_count", default: 0, null: false
     t.index ["bucket_id"], name: "index_bubbles_on_bucket_id"
   end
 
@@ -98,11 +91,22 @@ ActiveRecord::Schema[8.0].define(version: 2024_10_02_163242) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.text "body"
+    t.text "body", null: false
     t.integer "creator_id", null: false
     t.integer "bubble_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.integer "bubble_id", null: false
+    t.integer "creator_id", null: false
+    t.json "particulars", default: {}
+    t.string "action", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bubble_id", "action"], name: "index_events_on_bubble_id_and_action"
+    t.index ["creator_id"], name: "index_events_on_creator_id"
   end
 
   create_table "pops", force: :cascade do |t|

@@ -1,11 +1,8 @@
 class Bubble < ApplicationRecord
-  include Assignable, Colored, Poppable, Searchable, Taggable
+  include Assignable, Boostable, Colored, Commentable, Eventable, Poppable, Searchable, Taggable, Threaded
 
   belongs_to :bucket
   belongs_to :creator, class_name: "User", default: -> { Current.user }
-
-  has_many :comments, dependent: :destroy
-  has_many :boosts, dependent: :destroy
 
   has_one_attached :image, dependent: :purge_later
 
@@ -14,7 +11,7 @@ class Bubble < ApplicationRecord
   before_save :set_default_title
 
   scope :reverse_chronologically, -> { order(created_at: :desc, id: :desc) }
-  scope :ordered_by_activity, -> { left_joins(:comments, :boosts).group(:id).order(Arel.sql("COUNT(comments.id) + COUNT(boosts.id) DESC")) }
+  scope :ordered_by_activity, -> { left_joins(:comments).group(:id).order(Arel.sql("COUNT(comments.id) + boost_count DESC")) }
 
   scope :mentioning, ->(query) do
     bubbles = search(query).select(:id).to_sql

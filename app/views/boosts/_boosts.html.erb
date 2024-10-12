@@ -1,6 +1,6 @@
 <%= button_to bucket_bubble_boosts_path(bubble.bucket, bubble),
-    class: "btn btn--plain",
-    data: { action: "toggle-class#toggle" },
-    form_class: "full-width" do %>
-  + <%= bubble.boosts.size if bubble.boosts.any? %>
+      class: "btn btn--plain",
+      data: { action: "toggle-class#toggle" },
+      form_class: "full-width" do %>
+  + <%= bubble.boost_count if bubble.boost_count.positive? %>
 <% end %>

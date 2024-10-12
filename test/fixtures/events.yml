@@ -1,0 +1,66 @@
+logo_created:
+  creator: david
+  bubble: logo
+  action: created
+  created_at: <%= 1.week.ago %>
+
+logo_assignment_jz:
+  creator: david
+  bubble: logo
+  action: assigned
+  particulars: <%= { assignee_ids: [ ActiveRecord::FixtureSet.identify(:jz) ] }.to_json %>
+  created_at: <%= 1.week.ago %>
+
+logo_assignment_km:
+  creator: david
+  bubble: logo
+  action: assigned
+  particulars: <%= { assignee_ids: [ ActiveRecord::FixtureSet.identify(:kevin) ] }.to_json %>
+  created_at: <%= 1.day.ago %>
+
+logo_boost_km1:
+  creator: kevin
+  bubble: logo
+  action: boosted
+  created_at: <%= 1.day.ago %>
+
+logo_boost_km2:
+  creator: kevin
+  bubble: logo
+  action: boosted
+  created_at: <%= 1.day.ago %>
+
+logo_boost_jz1:
+  creator: jz
+  bubble: logo
+  action: boosted
+  created_at: <%= 1.day.ago %>
+
+logo_boost_jz2:
+  creator: jz
+  bubble: logo
+  action: boosted
+
+layout_created:
+  creator: david
+  bubble: layout
+  action: created
+  created_at: <%= 1.week.ago %>
+
+layout_assignment_jz:
+  creator: david
+  bubble: layout
+  action: assigned
+  particulars: <%= { assignee_ids: [ ActiveRecord::FixtureSet.identify(:jz) ] }.to_json %>
+
+text_created:
+  creator: kevin
+  bubble: text
+  action: created
+  created_at: <%= 1.week.ago %>
+
+shipping_created:
+  creator: kevin
+  bubble: shipping
+  action: created
+  created_at: <%= 1.week.ago %>

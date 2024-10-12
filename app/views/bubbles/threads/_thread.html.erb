@@ -1,0 +1,13 @@
+<% bubble = thread.bubble %>
+
+<section id="<%= dom_id(bubble, :thread) %>"
+  class="comments align-center center borderless margin flex flex-column gap-half"
+  style="--bubble-color: <%= bubble.color %>;"
+  data-controller="thread"
+  data-thread-my-comment-class="comment--mine">
+  <% cache thread do %>
+    <%= render partial: "bubbles/threads/entry", collection: thread.entries, cache: true %>
+  <% end %>
+
+  <%= render "comments/new", bubble: bubble %>
+</section>

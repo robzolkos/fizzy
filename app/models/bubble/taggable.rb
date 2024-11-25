@@ -18,13 +18,6 @@ module Bubble::Taggable
     taggings.destroy_by tag: tag
   end
 
-  def swap_tag(incoming, outgoing)
-    transaction do
-      untag outgoing
-      tag incoming unless incoming == outgoing
-    end
-  end
-
   def toggle_tag(tag)
     tagged_with?(tag) ? untag(tag) : tag(tag)
   end

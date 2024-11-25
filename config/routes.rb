@@ -29,12 +29,10 @@ Rails.application.routes.draw do
       end
 
       namespace :assignments, as: :assignment do
-        resources :swaps
         resources :toggles
       end
 
       namespace :taggings, as: :tagging do
-        resources :swaps
         resources :toggles
       end
     end

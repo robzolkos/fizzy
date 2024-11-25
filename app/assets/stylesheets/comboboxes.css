@@ -18,16 +18,3 @@
     background-color: var(--color-ink-reversed);
   }
 }
-
-.bubble__meta {
-  .hw-combobox {
-    position: absolute;
-    right: 0;
-    top: -0.25rem;
-    z-index: 1;
-  }
-
-  .hw-combobox__main__wrapper {
-    position: absolute;
-  }
-}

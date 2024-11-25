@@ -22,13 +22,6 @@ module Bubble::Assignable
     track_event :unassigned, assignee_ids: [ user.id ] if destructions.any?
   end
 
-  def swap_assignment(incoming, outgoing)
-    transaction do
-      unassign outgoing
-      assign incoming unless incoming == outgoing
-    end
-  end
-
   def toggle_assignment(user)
     assigned_to?(user) ? unassign(user) : assign(user)
   end

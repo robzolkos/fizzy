@@ -1,30 +1,41 @@
 <li class="<%= class_names("flex align-center gap-half margin-none", drafted: bubble.drafted?) %>" style="--bubble-color: <%= bubble.color %>; <%= bubble_rotation(bubble) %>"
     data-controller="animation" data-animation-play-class="bubble--wobble" data-animation-play-on-load-value="true" data-action="mouseover->animation#play">
-  <div class="bubble__shape flex-item-no-shrink"></div>
+  <%= link_to bucket_bubble_path(bubble.bucket, bubble) do %>
+    <div class="bubble__shape flex-item-no-shrink"></div>
+  <% end %>
 
-  <div class="flex flex-column min-width">
-    <%= link_to bucket_bubble_path(bubble.bucket, bubble), class: "bubble__title-link flex align-center gap min-width" do %>
-      <strong class="bubble__title-text flex--inline gap-half overflow-ellipsis"><%= bubble.title %></strong>
-    <% end %>
+  <div class="flex flex-column flex-item-grow">
+    <div class="flex align-center gap-half margin-none">
+      <div class="flex flex-column min-width">
+        <div class="flex align-center gap-half flex-item-no-shrink">
+          <%= link_to bucket_bubble_path(bubble.bucket, bubble), class: "bubble__title-link" do %>
+            <strong class="bubble__title-text flex--inline gap-half overflow-ellipsis"><%= bubble.title %></strong>
+          <% end %>
 
-    <div class="flex align-end gap-half txt-small full-width">
-      <%= render "bubbles/tags", bubble: bubble %>
+          <% if bubble.messages.many? %>
+            <span class="translucent">(<%= bubble.messages.count %>)</span>
+          <% end %>
+
+          <% bubble.assignees.each do |assignee| %>
+            <%= link_to bubbles_path(@filter.as_params.merge(assignee_ids: [ assignee.id ])), class: "btn avatar", style: "font-size: 0.4em;" do %>
+              <%= avatar_image_tag assignee, loading: :lazy %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+
+      <hr class="separator--horizontal flex-item-grow" aria-hidden="true" style="--border-color: var(--color-subtle-dark); --border-style: dotted" />
+
+      <% if bubble.due_on.present? %>
+        <strong class="txt-nowrap txt-small" style="color: <%= bubble.color %>">
+          <%= local_datetime_tag bubble.due_on, style: :shortdate %>
+        </strong>
+      <% end %>
+    </div>
+
+    <div class="flex gap-half txt-small full-width">
+      <span><%= "Added by #{bubble.creator.name} on" %> <%= local_datetime_tag bubble.created_at, style: :shortdate %></span>
+      <span><%= render "bubbles/tags", bubble: bubble %></span>
     </div>
   </div>
-
-  <hr class="separator--horizontal flex-item-grow" aria-hidden="true" style="--border-color: var(--color-subtle-dark); --border-style: dashed" />
-
-  <div class="flex align-center gap-half flex-item-no-shrink">
-    <% bubble.assignees.each do |assignee| %>
-      <%= link_to bubbles_path(@filter.as_params.merge(assignee_ids: [ assignee.id ])), class: "btn avatar txt-x-small" do %>
-        <%= avatar_image_tag assignee, loading: :lazy %>
-      <% end %>
-    <% end %>
-  </div>
-
-  <% if bubble.due_on.present? %>
-    <time class="txt-nowrap txt-small fill-black txt-reversed border-radius" style="background-color: <%= bubble.color %>; padding: 0.3em 0.6em;">
-      <%= bubble.due_on.strftime("%b %d") %>
-    </time>
-  <% end %>
 </li>

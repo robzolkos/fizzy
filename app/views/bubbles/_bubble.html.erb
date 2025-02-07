@@ -9,10 +9,12 @@
     <div>
       <h1 class="bubble__title">
         <% if bubble.creating? %>
-          <%= turbo_frame_tag bubble, :edit, src: edit_bucket_bubble_path(bubble.bucket, bubble) %>
+          <%= form_with model: bubble, url: bucket_bubble_path(bubble.bucket, bubble) do |form| %>
+            <%= form.text_field :title, placeholder: "Name it…", class: "input txt-align-center full-width borderless", autofocus: bubble.title.blank? %>
+          <% end %>
         <% else %>
           <%= turbo_frame_tag bubble, :edit do %>
-            <%= link_to bubble.title, edit_bucket_bubble_path(bubble.bucket, bubble), class: "txt-undecorated" %>
+            <%= link_to bubble_title(bubble), edit_bucket_bubble_path(bubble.bucket, bubble), class: "txt-undecorated" %>
 
             <div class="bubble__tags flex flex-wrap align-end justify-center gap-half txt-tight-lines">
               <%= render "bubbles/tags", bubble: bubble %>

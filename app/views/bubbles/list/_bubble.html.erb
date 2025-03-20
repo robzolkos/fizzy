@@ -11,7 +11,7 @@
       <div class="flex flex-column min-width">
         <div class="flex align-center gap-half max-width full-width">
           <%= link_to bucket_bubble_path(bubble.bucket, bubble), class: "bubble__title-link flex-item-grow max-width overflow-ellipsis" do %>
-            <strong class="bubble__title-text"><%= bubble.title %></strong>
+            <strong class="bubble__title-text"><%= bubble_title(bubble) %></strong>
           <% end %>
 
           <% if bubble.messages.comments.many? %>

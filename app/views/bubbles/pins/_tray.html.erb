@@ -1,16 +1,16 @@
 <%= turbo_stream_from Current.user, :pins %>
 
-<%= tag.dialog id: "pin-tray", class: "pin-tray flex flex-column gap unpad borderless justify-end fill-transparent",
+<%= tag.dialog id: "pin-tray", class: "tray pin-tray flex flex-column gap unpad borderless justify-end fill-transparent",
       data: { controller: "dialog", turbo_permanent: true, dialog_modal_value: false, dialog_target: "dialog", action: "keydown.esc->dialog#close:stop click@document->dialog#closeOnClickOutside" } do %>
   <%= turbo_frame_tag "pins", src: bubbles_pins_tray_path %>
 
-  <div class="pin-tray__actions flex align-center gap-half">
+  <div class="tray__actions flex align-center gap-half">
     <%= tag.button type: "button", class: "pin-tray__all_action btn flex-item-justify-start shadow", data: { action: "click->dialog#close"} do %>
       <%= image_tag "remove-med.svg", aria: { hidden: true }, size: 24 %>
       <span class="for-screen-reader">Close</span>
     <% end %>
   </div>
 
-  <button class="pin-tray__expander borderless unpad fill-transparent" data-action="dialog#toggle" aria-label="Expand pins stack">
+  <button class="tray__expander borderless unpad fill-transparent" data-action="dialog#toggle" aria-label="Expand pins stack">
   </button>
 <% end %> 

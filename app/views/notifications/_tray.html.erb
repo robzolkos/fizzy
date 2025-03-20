@@ -1,18 +1,18 @@
 <%= turbo_stream_from Current.user, :notifications %>
 
-<%= tag.dialog id: "notification-tray", class: "notification-tray flex flex-column gap unpad borderless justify-end fill-transparent",
+<%= tag.dialog id: "notification-tray", class: "tray notification-tray flex flex-column gap unpad borderless justify-end fill-transparent",
       data: { controller: "dialog", turbo_permanent: true, dialog_modal_value: false, dialog_target: "dialog", action: "keydown.esc->dialog#close:stop click@document->dialog#closeOnClickOutside" } do %>
   <%= turbo_frame_tag("notifications", src: notifications_tray_path) -%>
 
-  <%= link_to notifications_path, class: "notification-tray__overflow border-radius", data: { action: "click->dialog#close"} do %>
-    <div class="notification__content border-radius pad shadow fill-white flex align-center txt-align-center gap full-width">
+  <%= link_to notifications_path, class: "tray__overflow border-radius", data: { action: "click->dialog#close"} do %>
+    <div class="notification__content border-radius pad shadow fill-white flex align-center txt-align-center gap full-width border txt-ink">
       <div class="flex flex-column txt-tight-lines min-width flex-item-grow">
         <strong>+ More…</strong>
       </div>
     </div>
   <% end %>
 
-  <div class="notification-tray__actions flex align-center gap-half">
+  <div class="tray__actions notification-tray__actions flex align-center gap-half">
     <%= button_to notifications_mark_all_read_path, class: "notification-tray__read_action btn flex-item-justify-start shadow", data: { action: "click->dialog#close", turbo_frame: "notifications" } do %>
       Mark all as read
     <% end %>
@@ -23,6 +23,6 @@
     <% end %>
   </div>
 
-  <button class="notification-tray__expander borderless unpad fill-transparent" data-action="dialog#toggle" aria-label="Expand notifications stack">
+  <button class="tray__expander borderless unpad fill-transparent" data-action="dialog#toggle" aria-label="Expand notifications stack">
   </button>
 <% end %>

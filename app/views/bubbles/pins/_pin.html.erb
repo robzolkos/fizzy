@@ -1,7 +1,7 @@
 <% cache pin do %>
-  <%= tag.div id: dom_id(pin), class: "pin flex position-relative" do %>
+  <%= tag.div id: dom_id(pin), class: "pin tray__item flex position-relative" do %>
     <%= link_to bucket_bubble_path(pin.bubble.bucket, pin.bubble),
-          class: "pin__content shadow fill-white flex align-start txt-align-start gap flex-item-grow max-width",
+          class: "pin__content shadow fill-white flex align-start txt-align-start gap flex-item-grow max-width border txt-ink overflow-clip",
           data: { action: "click->dialog#close", turbo_frame: "_top" },
           style: "--bubble-color: #{ pin.bubble.color };" do %>
       <div class="flex flex-column min-width flex-item-grow">
@@ -19,7 +19,7 @@
   
         <strong class="pin__title overflow-ellipsis"><%= bubble_title(pin.bubble) %></strong>
   
-        <div class="pin__meta flex align-end txt-normal gap-half txt-tight-lines">
+        <div class="tray__item-meta flex align-end txt-normal gap-half txt-tight-lines">
           <div class="translucent">
             <span>Updated</span> <%= local_datetime_tag(pin.bubble.updated_at, style: :ago) -%>
           </div>

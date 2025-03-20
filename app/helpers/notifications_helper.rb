@@ -22,10 +22,10 @@ module NotificationsHelper
   end
 
   def notification_tag(notification, &)
-    tag.div id: dom_id(notification), class: "notification border-radius flex position-relative" do
+    tag.div id: dom_id(notification), class: "notification tray__item border-radius flex position-relative" do
       concat(
         link_to(notification.resource,
-          class: "notification__content border-radius pad shadow fill-white flex align-start txt-align-start gap flex-item-grow max-width",
+          class: "notification__content border-radius pad shadow fill-white flex align-start txt-align-start gap flex-item-grow max-width border txt-ink",
           data: { action: "click->dialog#close", turbo_frame: "_top" },
           &)
       )

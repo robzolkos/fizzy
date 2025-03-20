@@ -1,66 +1,12 @@
 .notification-tray {
-  --size: 38ch;
-  --height: calc(5ch + 1lh + var(--block-space));
-
-  block-size: var(--height);
-  inline-size: var(--size);
   inset: auto var(--inline-space) var(--block-space-half) auto;
-  padding: var(--block-space-half) var(--inline-space);
-  position: fixed;
-  z-index: 1;
 
   .notification {
-    --offset: calc((var(--position) - 1) * (var(--block-space) * -1));
-    --position: 1;
-    --scale: calc(1 - var(--position) / 30);
-    --z: calc(6 - var(--position));
-
-    inset: auto auto 0;
-    inline-size: var(--size);
-    outline: 0;
-    pointer-events: none;
-    position: absolute;
-    scale: var(--scale);
-    transform: translateY(var(--offset));
-    transform-origin: center;
-    transition: scale 0.2s ease-out, transform 0.2s ease-out;
-    z-index: var(--z);
-
-    &:nth-child(1) { --position: 1; }
-    &:nth-child(2) { --position: 2; }
-    &:nth-child(3) { --position: 3; }
-    &:nth-child(4) { --position: 4; }
-    &:nth-child(5) { --position: 5; }
-    &:nth-child(6) { --position: 6; }
-
     &:nth-child(1n + 7) { display: none; }
-
-    .notification-tray[open] & {
-      --scale: 1;
-      --offset: calc((100% + var(--block-space-half)) * (var(--position) * -1));
-
-      margin-block-end: calc(var(--block-space) * -1);
-      pointer-events: unset;
-    }
-
-    .notification-tray:has(.notification:only-child) & {
-      pointer-events: unset;
-    }
   }
 }
 
 .notification-tray__actions {
-  opacity: 0;
-  scale: calc(1 - 1 / 30);
-  transform: translateY(100%);
-  transition: opacity 0.2s ease-out, scale 0.2s ease-out, transform 0.2s ease-out;
-
-  .notification-tray[open] & {
-    opacity: 1;
-    scale: 1;
-    transform: translateY(0);
-  }
-
   .notification-tray:has(.notification) & {
     .btn img {
       display: none;
@@ -68,11 +14,6 @@
   }
 
   .notification-tray:not(:has(.notification)) & {
-    opacity: 1;
-    scale: 1;
-    transform: none;
-    transition: none;
-
     .notification-tray__all_action {
       --btn-border-radius: 50%;
       --btn-padding: 0;
@@ -99,73 +40,22 @@
 }
 
 .notification__content {
-  --border-radius: 0.2em;
-
-  color: var(--color-ink);
+  --border-color: transparent;
+  --border-radius: 0.3em;
 
   @media (prefers-color-scheme: dark) {
-    border: 1px solid var(--color-subtle-dark);
+    --border-color: var(--color-subtle-dark);
   }
 
   .notificiations-list--read & {
-    border: 1px solid var(--color-subtle);
+    --border-color: var(--color-subtle);
+
     box-shadow: none;
   }
 }
 
-.notification__meta {
-  font-size: 0.9em;
-  font-weight: 500;
-}
-
 .notification__title {
   padding-inline-end: calc(var(--inline-space-half) + 1.2em);
-}
-
-.notification-tray__expander {
-  --hover-size: 0;
-  --outline-size: 0;
-
-  cursor: pointer;
-  inset: 0;
-  position: absolute;
-  z-index: 6;
-
-  .notification-tray[open] &,
-  .notification-tray:not(:has(.notification)) &,
-  .notification-tray:has(.notification:only-child) & {
-    display: none;
-  }
-}
-
-.notification-tray__overflow {
-  --border-radius: 0.2em;
-  --offset: calc((var(--position) - 1) * (var(--block-space) * -1));
-  --position: 7;
-  --scale: calc(1 - var(--position) / 30);
-  --z: calc(6 - var(--position));
-
-  block-size: var(--height);
-  display: none;
-  inset: auto auto 0;
-  inline-size: var(--size);
-  pointer-events: none;
-  position: absolute;
-  scale: var(--scale);
-  transform: translateY(var(--offset));
-  transition: scale 0.2s ease-out, transform 0.2s ease-out;
-  z-index: var(--z);
-
-  .notification-tray:has(.notification:nth-child(7)) & {
-    display: flex;
-  }
-
-  .notification-tray[open] & {
-    --offset: calc((100% + var(--block-space-half)) * (var(--position) * -1));
-    --scale: 1;
-
-    pointer-events: unset;
-  }
 }
 
 .notification__unread_indicator {

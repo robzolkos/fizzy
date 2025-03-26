@@ -10,6 +10,11 @@
   position: fixed;
   z-index: 1;
 
+  @media (prefers-color-scheme: dark) {
+    background-color: var(--color-always-black);
+    border-block-start: 1px solid var(--color-subtle-dark);
+  }
+
   .terminal__input {
     --input-border-color: transparent;
     --input-border-radius: 0.3em;
@@ -23,12 +28,12 @@
     font-family: inherit;
 
     &::placeholder {
-      color: var(--color-positive-light);
+      color: var(--color-always-white);
       opacity: 0.5;
     }
 
     .terminal__link & {
-      color: var(--color-positive-light);
+      color: var(--color-always-white);
       opacity: 0.5;
     }
   }

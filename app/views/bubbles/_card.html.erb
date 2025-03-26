@@ -1,6 +1,7 @@
 <% cache bubble do %>
-  <article class="card flex flex-column position-relative txt-align-start full-width" 
-        style="--bubble-color: <%= bubble.color %>; view-transition-name: <%= dom_id(bubble, :ticket) %>;" id="<%= dom_id(bubble, :ticket) %>">
+  <article class="card flex flex-column position-relative txt-align-start full-width border-radius" 
+        style="--bubble-color: <%= bubble.color %>; view-transition-name: <%= dom_id(bubble, :ticket) %>;" 
+        id="<%= dom_id(bubble, :ticket) %>">
     <header class="card__header flex align-center gap min-width">
       <%= link_to bubble.bucket.name, bubbles_path(bucket_ids: [ bubble.bucket ]), 
             class: "card__bucket txt-uppercase overflow-ellipsis txt-reversed" %>
@@ -32,7 +33,7 @@
       <%= turbo_frame_tag dom_id(bubble, :stage_picker), src: new_bucket_bubble_stage_picker_path(bubble.bucket, bubble) %>
     </div>
 
-    <footer class="card__footer full-width flex align-center gap">
+    <footer class="card__footer full-width flex align-start gap">
       <%= render "bubbles/people", bubble: bubble %>
       <%= render "bubbles/meta", bubble: bubble %>
     </footer>
@@ -45,7 +46,7 @@
       <div class="card__popped flex flex-column">
         <span class="card__popped-title txt-uppercase">Completed</span>
         <strong><%= bubble.popped_at.strftime("%b %d, %Y") %></strong>
-        <span>by <span style="border-block-end: 1px dashed var(--color-ink);"><%= bubble.popped_by.name %></span></span>
+        <span>by <span class="card__popped-by"><%= bubble.popped_by.name %></span></span>
       </div>
     <% end %>
   </article>

@@ -4,9 +4,9 @@
           class: "pin__content shadow fill-white flex align-start txt-align-start gap flex-item-grow max-width border border-radius txt-ink overflow-clip",
           data: { action: "click->dialog#close", turbo_frame: "_top" },
           style: "--bubble-color: #{ pin.bubble.color };" do %>
-      <div class="flex flex-column min-width flex-item-grow txt-small">
+      <div class="flex flex-column min-width flex-item-grow">
         <div class="pin__header flex gap-half align-center txt-uppercase">
-          <div class="pin__bucket flex-inline flex-item-justify-start txt-reversed min-width">
+          <div class="pin__bucket flex-inline flex-item-justify-start txt-reversed min-width txt-xx-small">
             <span class="txt-xx-small overflow-ellipsis"><%= pin.bubble.bucket.name %></span>
           </div>
 
@@ -17,7 +17,7 @@
           <% end %>
         </div>
   
-        <strong class="pin__title overflow-ellipsis"><%= bubble_title(pin.bubble) %></strong>
+        <strong class="pin__title overflow-ellipsis txt-small"><%= bubble_title(pin.bubble) %></strong>
   
         <div class="tray__item-meta flex align-end gap-half txt-tight-lines">
           <div class="translucent">

@@ -4,9 +4,9 @@
       <%= avatar_image_tag(notification.creator) %>
     </div>
 
-    <div class="flex flex-column txt-tight-lines min-width flex-item-grow txt-small">
-      <strong class="overflow-ellipsis notification__title"><%= notification_title(notification) %></strong>
-        <div class="overflow-ellipsis">
+    <div class="flex flex-column min-width flex-item-grow">
+      <strong class="overflow-ellipsis notification__title txt-small txt-tight-lines"><%= notification_title(notification) %></strong>
+        <div class="overflow-ellipsis txt-small txt-tight-lines">
           <% if notification.event.action == "commented" %>
             <%= "#{ strip_tags(notification.event.comment.body_html).blank? ? "#{ notification.event.creator.name } replied" : "#{ notification.event.creator.name }:" } #{ strip_tags(notification.event.comment.body_html).truncate(200) }" %>
           <% else %>

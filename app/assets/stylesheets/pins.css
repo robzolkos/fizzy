@@ -17,14 +17,15 @@
   background-color: var(--bubble-color);
   font-weight: 800;
   letter-spacing: 0.3ch;
-  padding: 0.3em 0.3em 0.3em 0.85em;
+  padding: 0.3em 0.6em 0.3em 1.5em;
 }
 
 .pin__content {
   --border-color: transparent;
-  --border-radius: 0.3em;
+  --border-radius: 0.2em;
+  --padding: 0.75em;
 
-  padding: 0.85em 0.85em 1em;
+  padding: var(--padding);
 
   @media (prefers-color-scheme: dark) {
     --border-color: var(--color-subtle-dark);
@@ -32,7 +33,7 @@
 }
 
 .pin__header {
-  margin: -0.85em -0.85em auto;
+  margin: calc(var(--padding) * -1) calc(var(--padding) * -1) auto;
   padding: 0 0.2em 0 0;
 }
 

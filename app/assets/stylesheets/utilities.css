@@ -8,14 +8,14 @@
   --block-space-double: calc(var(--block-space) * 2);
 
   /* Text sizes */
-  --text-xx-small: 0.6rem;
+  --text-xx-small: 0.55rem;
   --text-x-small: 0.7rem;
   --text-small: 0.8rem;
   --text-normal: 1rem;
   --text-medium: 1.1rem;
   --text-large: 1.5rem;
   --text-x-large: 1.8rem;
-  --text-xx-large: 2.4rem;
+  --text-xx-large: 2.5rem;
 }
 
 /* Text */
@@ -183,7 +183,7 @@
 .borderless { border: 0; }
 
 /* Border radius */
-.border-radius { border-radius: var(--border-radius, 1em); }
+.border-radius { border-radius: var(--border-radius, 0.5em); }
 
 /* Shadows */
 .shadow {

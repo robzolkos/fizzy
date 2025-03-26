@@ -3,7 +3,7 @@
 }
 
 .tray {
-  --height: calc(2.81lh + var(--block-space));
+  --height: calc(2.57lh + var(--block-space));
 
   background-color: transparent;
   border: 0;
@@ -101,7 +101,7 @@
 }
 
 .tray__item-meta {
-  font-size: var(--text-small);
+  font-size: var(--text-x-small);
   font-weight: 500;
 }
 
@@ -115,12 +115,13 @@
 
   block-size: var(--height);
   display: none;
-  inset: auto auto 0;
+  inset: auto 0.1ch 0 auto;
   inline-size: var(--tray-size);
   pointer-events: none;
   position: absolute;
   scale: var(--scale);
   transform: translateY(var(--offset));
+  transform-origin: center;
   transition: scale 0.2s ease-out, transform 0.2s ease-out;
   z-index: var(--z);
 

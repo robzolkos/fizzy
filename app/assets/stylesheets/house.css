@@ -13,10 +13,13 @@ house-md {
 /* Toolbar */
 house-md-toolbar {
   background-color: inherit;
+  border-block-end: 1px solid var(--color-subtle-dark);
   border-radius: 0;
   color: currentColor;
   display: inline-flex;
   font-size: inherit;
+  max-inline-size: 100%;
+  overflow-x: auto;
   padding: 0.2em;
 
   button, label {

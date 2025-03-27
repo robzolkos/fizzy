@@ -110,6 +110,9 @@ class FilterTest < ActiveSupport::TestCase
 
     filters(:jz_assignments).update!(stages: [], assignees: [], tags: [], buckets: [ buckets(:writebook) ])
     assert_equal "Most discussed in Writebook", filters(:jz_assignments).summary
+
+    filters(:jz_assignments).update!(indexed_by: "most_stale")
+    assert_equal "Most stale in Writebook", filters(:jz_assignments).summary
   end
 
   test "params without a key-value pair" do

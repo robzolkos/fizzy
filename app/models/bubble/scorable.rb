@@ -5,6 +5,13 @@ module Bubble::Scorable
 
   included do
     scope :ordered_by_activity, -> { order activity_score_order: :desc }
+
+    # Staleness is measured by the amount of activity_score lost since it was last updated.
+    # The factor 0.9 is chosen to make the decay curve closer to linear; an exponential
+    # curve would make recent items appear stale very quickly, due to the sharp dropoff.
+    scope :ordered_by_staleness, -> { order Arel.sql(
+      "coalesce(activity_score * (1 - power(0.9, julianday('now') - julianday(activity_score_at))), 0) desc"
+    ) }
   end
 
   def rescore

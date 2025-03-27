@@ -50,7 +50,32 @@ class Bubble::ScorableTest < ActiveSupport::TestCase
       travel_back
       bubble_new.boost!
 
-      assert_equal [ bubble_new, bubble_mid, bubble_old ], Bubble.where(id: [ bubble_old, bubble_mid, bubble_new ]).ordered_by_activity
+      assert_equal %w[ new mid old ], Bubble.where(id: [ bubble_old, bubble_mid, bubble_new ]).ordered_by_activity.map(&:title)
+    end
+  end
+
+  test "items with old activity are more stale than those with none, or with new activity" do
+    with_current_user :kevin do
+      travel_to 20.days.ago
+      bubble_old = buckets(:writebook).bubbles.create! status: :published, title: "old"
+      bubble_new = buckets(:writebook).bubbles.create! status: :published, title: "new"
+      bubble_none = buckets(:writebook).bubbles.create! status: :published, title: "none"
+
+      bubble_old.boost!
+      bubble_old.boost!
+
+      travel_back
+      travel_to 2.days.ago
+      bubble_new.boost!
+      bubble_new.boost!
+
+      travel_back
+
+      assert_equal %w[ old new none ], Bubble.where(id: [ bubble_none, bubble_old, bubble_new ]).ordered_by_staleness.map(&:title)
+
+      bubble_old.boost!
+
+      assert_equal %w[ new old none ], Bubble.where(id: [ bubble_none, bubble_old, bubble_new ]).ordered_by_staleness.map(&:title)
     end
   end
 

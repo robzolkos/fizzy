@@ -1,14 +1,6 @@
 module CardsHelper
-  CARD_ROTATION = %w[ 75 60 45 35 25 5 ]
-
   def card_title(card)
     card.title.presence || "Untitled"
-  end
-
-  def card_rotation(card)
-    value = CARD_ROTATION[Zlib.crc32(card.to_param) % CARD_ROTATION.size]
-
-    "--card-rotate: #{value}deg;"
   end
 
   def cards_next_page_link(target, page:, filter:, fetch_on_visible: false, data: {}, **options)

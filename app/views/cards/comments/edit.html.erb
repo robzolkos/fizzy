@@ -9,7 +9,7 @@
             <span>Save changes</span>
           <% end %>
           <%= link_to card_comment_path(@card, @comment), class: "btn", data: { form_target: "cancel" } do %>
-            <span">Cancel</span>
+            <span>Cancel</span>
           <% end %>
 
           <%= tag.button type: :submit, class: "btn btn--negative flex-item-justify-end", form: dom_id(@comment, :delete_form),

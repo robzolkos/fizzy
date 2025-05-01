@@ -23,8 +23,8 @@
 
     <%= render "cards/display/common/background", card: card %>
 
-    <% if card.considering? && card.auto_close_remind? %>
-      <%= render "cards/display/preview/badge", label: "Closes in", days: card.auto_close_days_until %>
+    <% if card.closing_soon? %>
+      <%= render "cards/display/preview/badge", label: "Closes in", days: card.days_until_close %>
     <% end %>
   <% end %>
 <% end %>

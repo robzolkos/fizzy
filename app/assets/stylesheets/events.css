@@ -10,15 +10,6 @@
   .events__day {
     position: relative;
 
-    /* Don't put borders around empty days */
-    &:has(*) {
-      border-block-start: var(--events-border);
-
-      @media (min-width: 640px) {
-        border-inline: var(--events-border);
-      }
-    }
-
     @media (max-width: 639px) {
       margin-block-end: calc(var(--events-gap) * 2);
     }
@@ -46,10 +37,12 @@
   }
 
   .events__columns {
+    border-block-start: var(--events-border);
     position: relative;
 
     @media (min-width: 640px) {
       align-items: end;
+      border-inline: var(--events-border);
       display: grid;
       grid-template-columns: repeat(3, 1fr);
 

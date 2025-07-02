@@ -1,5 +1,5 @@
 <li class="flex align-center gap-half pad-inline" data-filter-target="item">
-  <%= avatar_tag user %>
+  <%= avatar_tag user, hidden_for_screen_reader: true %>
 
   <strong class="overflow-ellipsis">
     <%= link_to user.name, user, class: "txt-ink btn btn--plain" %>

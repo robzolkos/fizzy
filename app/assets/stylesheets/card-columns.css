@@ -85,7 +85,7 @@
 
     .card__background {
       .card:has(& img:not([src=""])) {
-        .card__body,
+        .card__content,
         .card__meta,
         .workflow-stage:not(.workflow-stage--current) {
           opacity: 0;

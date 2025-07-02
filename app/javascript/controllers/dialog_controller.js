@@ -6,6 +6,10 @@ export default class extends Controller {
     modal: { type: Boolean, default: false }
   }
 
+  connect() {
+    this.dialogTarget.setAttribute('aria-hidden', 'true')
+  }
+
   open() {
     const modal = this.modalValue
 
@@ -14,6 +18,7 @@ export default class extends Controller {
     } else {
       this.dialogTarget.show()
     }
+    this.dialogTarget.setAttribute('aria-hidden', 'false')
   }
 
   toggle() {
@@ -26,6 +31,7 @@ export default class extends Controller {
 
   close() {
     this.dialogTarget.close()
+    this.dialogTarget.setAttribute('aria-hidden', 'true')
     this.dialogTarget.blur()
   }
 

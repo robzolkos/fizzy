@@ -37,8 +37,14 @@
   }
 
   .comment__author {
-    .comment--system & strong {
-      display: none;
+    .comment--system & {
+      h3 {
+        margin-inline: auto;
+      }
+
+      strong {
+        display: none;
+      }
     }
 
     .btn {

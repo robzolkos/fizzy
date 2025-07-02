@@ -7,7 +7,7 @@
       <% end %>
     </div>
   <% else %>
-    <details class="expander" data-controller="details" data-details-target="details" data-action="keydown.esc->details#close click@document->details#closeOnClickOutside">
+    <details class="expander" data-controller="details" data-details-target="details" data-action="keydown.esc->details#close:stop click@document->details#closeOnClickOutside">
       <summary class="expander__button btn borderless">
         Close as
         <%= icon_tag "caret-down" %>

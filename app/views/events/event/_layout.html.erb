@@ -6,12 +6,12 @@
             related_element_group_value: card.id,
             action: "mouseover->related-element#highlight mouseout->related-element#unhighlight" } do %>
   <div class="card__header flex align-start gap full-width">
-    <div class="card__collection flex-inline align-start">
+    <h4 class="card__collection flex-inline align-start">
       <span class="card__id"><%= card.id %></span>
       <span class="card__collection-name">
         <span class="overflow-ellipsis"><%= event.collection.name %></span>
       </span>
-    </div>
+    </h4>
 
     <% if event_column(event) == 2 %>
       <span class="event__icon flex-item-justify-end txt-reversed">

@@ -4,7 +4,7 @@
 
   <body class="public" data-controller="local-time timezone-cookie" data-action="turbo:morph@window->local-time#refreshAll">
     <header id="header">
-      <a href="#main-content" class="skip-navigation btn">Skip to main content</a>
+      <a href="#main" class="skip-navigation btn" data-turbo="false">Skip to main content</a>
       <%= yield :header %>
     </header>
 

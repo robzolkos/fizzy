@@ -1,4 +1,4 @@
-<div class="quick-reaction" data-controller="dialog" data-action="keydown.esc->dialog#close click@document->dialog#closeOnClickOutside">
+<div class="quick-reaction" data-controller="dialog" data-action="keydown.esc->dialog#close:stop click@document->dialog#closeOnClickOutside">
   <%= yield %>
 
   <dialog class="quick-reaction__popup popup panel fill-white shadow" data-dialog-target="dialog">

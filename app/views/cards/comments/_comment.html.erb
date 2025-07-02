@@ -8,14 +8,16 @@
 
       <div class="comment__content flex flex-column flex-item-grow full-width">
         <div class="comment__author flex align-center gap-half">
-          <strong>
-            <%= link_to comment.creator.name, comment.creator, class: "txt-ink btn btn--plain fill-transparent", data: { turbo_frame: "_top" } %>
-          </strong>
+          <h3 class="font-weight-normal txt-normal flex-item-justify-start">
+            <strong>
+              <%= link_to comment.creator.name, comment.creator, class: "txt-ink btn btn--plain fill-transparent", data: { turbo_frame: "_top" } %>
+            </strong>
 
-          <%= link_to comment, class: "txt-undecorated txt-ink translucent txt-normal txt-capitalize flex-item-justify-start" do %>
-            <%= local_datetime_tag comment.created_at, style: :agoorweekday %>,
-            <%= local_datetime_tag comment.created_at, style: :time %>
-          <% end %>
+            <%= link_to comment, class: "txt-undecorated txt-ink translucent txt-normal txt-capitalize" do %>
+              <%= local_datetime_tag comment.created_at, style: :agoorweekday %>,
+              <%= local_datetime_tag comment.created_at, style: :time %>
+            <% end %>
+          </h3>
 
           <%= link_to edit_card_comment_path(comment.card, comment),
                 class: "comment__edit btn btn--circle borderless fill-transparent translucent" do %>

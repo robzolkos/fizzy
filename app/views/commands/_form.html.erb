@@ -6,7 +6,7 @@
         terminal_target: "form",
         action: "turbo:submit-start->terminal#commandSubmitted turbo:submit-end->terminal#focus keydown.meta+k@document->terminal#focus:prevent keydown.ctrl+k@document->terminal#focus:prevent keydown.enter->terminal#executeCommand keydown.esc->terminal#hideMenus turbo:submit-end->terminal#handleCommandResponse"
       } do %>
-  <label class="terminal__label txt-nowrap" for="fizzy_do">Fizzy do &gt;</label>
+  <label class="terminal__label txt-nowrap" for="command">Fizzy do &gt;</label>
 
   <%= text_field_tag "command", nil,
         autocomplete: "off",
@@ -20,5 +20,5 @@
         placeholder: platform.desktop? ? "Press #{ hotkey_label(["ctrl", "K"]) } to search or type commands…" : "Search or type commands…",
         spellcheck: "false" %>
 
-  <%=  hidden_field_tag "confirmed", nil, data: { terminal_target: "confirmation" } %>
+  <%= hidden_field_tag "confirmed", nil, data: { terminal_target: "confirmation" } %>
 <% end %>

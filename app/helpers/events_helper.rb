@@ -37,7 +37,7 @@ module EventsHelper
 
   def event_cluster_tag(hour, col, &)
     row = 25 - hour
-    tag.ul class: "events__time-block", style: "grid-area: #{row}/#{col}", &
+    tag.div class: "events__time-block", style: "grid-area: #{row}/#{col}", &
   end
 
   def event_next_page_link(next_day)

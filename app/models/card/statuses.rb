@@ -4,6 +4,8 @@ module Card::Statuses
   included do
     enum :status, %w[ creating drafted published ].index_by(&:itself)
 
+    after_create -> { track_event :published }, if: :published?
+
     scope :published_or_drafted_by, ->(user) { where(status: :published).or(where(status: :drafted, creator: user)) }
   end
 

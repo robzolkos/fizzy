@@ -25,7 +25,7 @@
           <% end %>
 
           <%= render "cards/comments/reactions/quick_reaction", comment: comment do %>
-            <button class="comment__reaction btn btn--circle borderless fill-transparent" data-action="click->dialog#open:stop">
+            <button class="comment__reaction btn btn--circle borderless" data-action="click->dialog#open:stop">
               <%= icon_tag "menu-dots-horizontal" %>
             </button>
           <% end %>

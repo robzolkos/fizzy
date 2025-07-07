@@ -104,6 +104,7 @@
   }
 
   .comment__reaction {
+    background-color: var(--color-ink-lightest);
     opacity: 0.66;
 
     @media (any-hover: hover) {

@@ -7,8 +7,8 @@ system("gem install bundler --conservative")
 system("bundle check") || system!("bundle install")
 
 puts "\n== Starting MySQL =="
-system!("git -C ~/Work/basecamp/shipyard pull || true")
-system!("~/Work/basecamp/shipyard/app-dev/setup mysql80")
+system "[ -d ~/Work/basecamp/docker-dev ] && git -C ~/Work/basecamp/docker-dev pull || gh repo clone basecamp/docker-dev ~/Work/basecamp/docker-dev"
+system! "~/Work/basecamp/docker-dev/setup mysql80"
 
 puts "\n== Preparing database =="
 if ARGV.include?("--reset")

@@ -26,12 +26,13 @@
 <%= render "filters/settings", user_filtering: @user_filtering, no_filtering_url: collection_path(@collection) %>
 
 <%= tag.div data: {
-      controller: "drag-and-drop",
+      controller: "drag-and-drop drag-and-strum",
       drag_and_drop_dragged_item_class: "drag-and-drop__dragged-item",
       drag_and_drop_hover_container_class: "drag-and-drop__hover-container",
       action: "
         dragstart->drag-and-drop#dragStart
         dragover->drag-and-drop#dragOver
+        dragenter->drag-and-strum#dragEnter
         drop->drag-and-drop#drop
         dragend->drag-and-drop#dragEnd" } do %>
 

@@ -1,6 +1,7 @@
 <section id="<%= dom_id(column) %>"
   class="cards cards--doing is-collapsed" style="--card-color: <%= column.color %>;"
   data-drag-and-drop-target="container"
+  data-drag-and-strum-target="container"
   data-collapsible-columns-target="column"
   data-action="turbo:before-morph-attribute->collapsible-columns#preventToggle"
   data-drag-and-drop-url="<%= columns_card_drops_column_path("__id__", column_id: column.id) %>"

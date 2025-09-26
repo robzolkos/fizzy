@@ -49,7 +49,6 @@ export default class extends Controller {
   connect() {
     this.instrumentIndex = 0
     this.preloadedAudioFiles = []
-
     document.addEventListener("keydown", this.handleKeyDown.bind(this));
   }
 

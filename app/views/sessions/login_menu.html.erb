@@ -1,0 +1,15 @@
+<% cache ApplicationRecord.tenants do %>
+  <h2>We're migrating Fizzy authentication</h2>
+  <p>
+    While we migrate Fizzy away from Launchpad and 37id, please login at one of the following URLs:
+
+    <ul style="list-style-type: none;">
+      <% ApplicationRecord.with_each_tenant do |tenant| %>
+        <li><%= link_to Account.sole.name, root_url(script_name: Account.sole.slug) %></li>
+      <% end %>
+    </ul>
+  </p>
+  <p>
+    Mike should have sent you your temporary password by now. If you haven't received it, please ping him!
+  </p>
+<% end %>

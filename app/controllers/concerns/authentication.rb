@@ -37,7 +37,9 @@ module Authentication
     end
 
     def require_tenant
-      ApplicationRecord.current_tenant.present? || request_authentication
+      unless ApplicationRecord.current_tenant.present?
+        render "sessions/login_menu"
+      end
     end
 
     def require_authentication

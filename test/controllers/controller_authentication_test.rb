@@ -6,7 +6,8 @@ class ControllerAuthenticationTest < ActionDispatch::IntegrationTest
 
     get cards_path
 
-    assert_redirected_to new_session_path
+    assert_response :success
+    assert_dom "h2", text: "We're migrating Fizzy authentication"
   end
 
   test "access with an account slug but no session redirects to new session" do

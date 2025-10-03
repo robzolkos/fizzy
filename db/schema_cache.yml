@@ -102,6 +102,16 @@ columns:
     comment:
   accounts:
   - *5
+  - !ruby/object:ActiveRecord::ConnectionAdapters::SQLite3::Column
+    auto_increment:
+    name: external_account_id
+    cast_type: *3
+    sql_type_metadata: *4
+    'null': true
+    default:
+    default_function:
+    collation:
+    comment:
   - *6
   - !ruby/object:ActiveRecord::ConnectionAdapters::SQLite3::Column
     auto_increment:
@@ -119,16 +129,6 @@ columns:
     cast_type: *7
     sql_type_metadata: *8
     'null': false
-    default:
-    default_function:
-    collation:
-    comment:
-  - !ruby/object:ActiveRecord::ConnectionAdapters::SQLite3::Column
-    auto_increment:
-    name: tenant_id
-    cast_type: *3
-    sql_type_metadata: *4
-    'null': true
     default:
     default_function:
     collation:
@@ -1666,10 +1666,10 @@ indexes:
   accounts:
   - !ruby/object:ActiveRecord::ConnectionAdapters::IndexDefinition
     table: accounts
-    name: index_accounts_on_tenant_id
+    name: index_accounts_on_external_account_id
     unique: true
     columns:
-    - tenant_id
+    - external_account_id
     lengths: {}
     orders: {}
     opclasses: {}
@@ -3222,4 +3222,4 @@ indexes:
     comment:
     valid: true
   workflows: []
-version: 20251001181713
+version: 20251003205559

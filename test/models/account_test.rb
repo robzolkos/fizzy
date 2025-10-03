@@ -9,15 +9,19 @@ class AccountTest < ActiveSupport::TestCase
   test ".create_with_admin_user creates a new local account" do
     ApplicationRecord.create_tenant("account-create-with-dependents") do
       account = Account.create_with_admin_user(
-        tenant_id: ActiveRecord::FixtureSet.identify("account-create-with-admin-user-test"),
-        account_name: "Account Create With Admin",
-        owner_name: "David",
-        owner_email: "david@37signals.com")
-
+        account: {
+          external_account_id: ActiveRecord::FixtureSet.identify("account-create-with-admin-user-test"),
+          name: "Account Create With Admin"
+        },
+        owner: {
+          name: "David",
+          email_address: "david@37signals.com"
+        }
+      )
       assert_not_nil account
       assert account.persisted?
       assert_equal 1, Account.count
-      assert_equal ActiveRecord::FixtureSet.identify("account-create-with-admin-user-test"), account.tenant_id
+      assert_equal ActiveRecord::FixtureSet.identify("account-create-with-admin-user-test"), account.external_account_id
       assert_equal "Account Create With Admin", account.name
 
       assert_equal 1, User.count

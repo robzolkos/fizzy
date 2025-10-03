@@ -20,10 +20,14 @@ def create_tenant(signal_account_name, bare: false)
   ApplicationRecord.destroy_tenant tenant_id
   ApplicationRecord.create_tenant(tenant_id) do
     account = Account.create_with_admin_user(
-      tenant_id: tenant_id,
-      account_name: signal_account_name,
-      owner_name: "David Heinemeier Hansson",
-      owner_email: "david@37signals.com",
+      account: {
+        external_account_id: tenant_id,
+        name: signal_account_name
+      },
+      owner: {
+        name: "David Heinemeier Hansson",
+        email_address: "david@37signals.com"
+      }
     )
     account.setup_basic_template
   end

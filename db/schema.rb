@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_10_01_181713) do
+ActiveRecord::Schema[8.1].define(version: 2025_10_03_205559) do
   create_table "accesses", force: :cascade do |t|
     t.datetime "accessed_at"
     t.integer "collection_id", null: false
@@ -26,11 +26,11 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_01_181713) do
 
   create_table "accounts", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.integer "external_account_id"
     t.string "join_code"
     t.string "name", null: false
-    t.integer "tenant_id"
     t.datetime "updated_at", null: false
-    t.index ["tenant_id"], name: "index_accounts_on_tenant_id", unique: true
+    t.index ["external_account_id"], name: "index_accounts_on_external_account_id", unique: true
   end
 
   create_table "action_text_rich_texts", force: :cascade do |t|

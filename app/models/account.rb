@@ -4,17 +4,9 @@ class Account < ApplicationRecord
   has_many_attached :uploads
 
   class << self
-    def create_with_admin_user(tenant_id:, account_name:, owner_name:, owner_email:)
-      account = create!(tenant_id:, name: account_name)
-
-      User.create!(
-        name:             owner_name,
-        email_address:    owner_email,
-        role:             "admin",
-        password:         SecureRandom.hex(16)
-      )
-
-      account
+    def create_with_admin_user(account:, owner:)
+      User.create!(**owner.reverse_merge(role: "admin", password: SecureRandom.hex(16)))
+      create!(**account)
     end
   end
 

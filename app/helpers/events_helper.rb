@@ -28,11 +28,9 @@ module EventsHelper
   private
     def event_column_title(base_title, count, day)
       date_tag = local_datetime_tag day, style: :agoorweekday
-      if count > 0
-        "#{h base_title} #{date_tag} <span class='font-weight-normal'>(#{h count})</span>".html_safe
-      else
-        "#{h base_title} #{date_tag}".html_safe
-      end
+      parts = [ base_title, date_tag ]
+      parts << tag.span("(#{count})", class: "font-weight-normal") if count > 0
+      safe_join(parts, " ")
     end
 
     def event_column(event)

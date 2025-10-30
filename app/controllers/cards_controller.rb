@@ -39,7 +39,7 @@ class CardsController < ApplicationController
 
   private
     def set_collection
-      @collection = Current.user.collections.find(params[:collection_id])
+      @collection = Current.user.collections.find params[:collection_id]
     end
 
     def set_card

@@ -11,6 +11,6 @@ module CollectionScoped
     end
 
     def cards_fresh_when(cards)
-      fresh_when etag: [ cards, @collection.entropy_configuration, @collection.name, @collection.columns.all ]
+      fresh_when etag: [ cards, @collection.entropy_configuration, @collection.columns.all ]
     end
 end

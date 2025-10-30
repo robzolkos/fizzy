@@ -48,6 +48,6 @@ module CardsHelper
   end
 
   def card_preview_cache_parts(card)
-    [ card, card.collection.entropy_configuration, card.collection.publication, card.collection.name, card.column ]
+    [ card, card.collection.entropy_configuration, card.collection.publication, card.column ]
   end
 end

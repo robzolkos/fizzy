@@ -133,7 +133,7 @@
     background-color: var(--color-container);
     border-radius: 0.2em;
     grid-area: card;
-    padding: clamp(2rem, 4vw, var(--padding-block)) clamp(16px, 4vw, var(--padding-inline));
+    padding: clamp(2rem, 4vw, var(--padding-block));
   }
 
   .card-perma__actions {

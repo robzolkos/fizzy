@@ -1,4 +1,4 @@
-<% column.sibling_columns.each do |sibling_column| %>
-  <%= turbo_stream.replace(dom_id(sibling_column), partial: "boards/show/column", method: :morph, locals: { column: sibling_column }) %>
+<% column.surroundings.each do |surrounding| %>
+  <%= turbo_stream.replace(dom_id(surrounding), partial: "boards/show/column", method: :morph, locals: { column: surrounding }) %>
 <% end %>
 

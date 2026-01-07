@@ -51,3 +51,20 @@
     }
   }
 }
+
+[data-bridge-components~=nav-button] {
+  [data-controller~=bridge--nav-button]:not(summary) {
+    display: none;
+  }
+
+  summary[data-controller~=bridge--nav-button] {
+    overflow: hidden;
+    width: 0;
+    height: 0;
+    position: absolute;
+
+    * {
+      display: none;
+    }
+  }
+}

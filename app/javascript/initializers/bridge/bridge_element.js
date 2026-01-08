@@ -15,8 +15,7 @@ BridgeElement.prototype.hideOnPlatform = function() {
 BridgeElement.prototype.getButton = function() {
   return {
     title: this.title,
-    icon: this.getIcon(),
-    label: this.getLabel()
+    icon: this.getIcon()
   }
 }
 
@@ -31,9 +30,6 @@ BridgeElement.prototype.getIcon = function() {
   return null
 }
 
-BridgeElement.prototype.getLabel = function() {
-  return this.bridgeAttribute("label")
-}
 
 BridgeElement.prototype.displaysNavButtonMenu = function() {
   return this.bridgeAttribute("displays-nav-button-menu") === "true"

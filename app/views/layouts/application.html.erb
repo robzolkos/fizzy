@@ -3,10 +3,10 @@
   <%= render "layouts/shared/head" %>
 
   <body class="<%= @body_class %>"
-    data-controller="local-time timezone-cookie turbo-navigation theme bridge--page bridge--insets bridge--buttons bridge--overflow-menu"
+    data-controller="local-time timezone-cookie turbo-navigation theme bridge--page bridge--insets"
     data-action="turbo:morph@window->local-time#refreshAll turbo:before-visit@document->turbo-navigation#rememberLocation"
     data-platform="<%= platform.type %>" <%= "data-bridge--page-title-value=#{@page_title}" if @page_title %>>
-    <div id="global-container">
+    <div id="global-container" data-controller="bridge--buttons bridge--overflow-menu">
       <header class="header header--mobile-actions-stack <%= @header_class %>" id="header">
         <a href="#main" class="header__skip-navigation btn" data-turbo="false">Skip to main content</a>
         <%= render "my/menu" if Current.user %>

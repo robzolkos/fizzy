@@ -5,35 +5,21 @@ export default class extends BridgeComponent {
   static component = "buttons"
   static targets = [ "button" ]
 
-  connect() {
-    super.connect()
-
-    if (this.hasButtonTarget) {
-      this.notifyBridgeOfConnect()
-    }
-  }
-
-  disconnect() {
-    super.disconnect()
-
-    if (this.hasButtonTarget) {
-      this.notifyBridgeOfDisconnect()
-    }
+  buttonTargetConnected(element) {
+    this.notifyBridgeOfConnect()
   }
 
   notifyBridgeOfConnect() {
-    const buttons = this.buttonTargets.map((target, index) => {
-      const element = new BridgeElement(target)
-      return { ...element.getButton(), index }
+    const buttons = this.buttonTargets
+      .filter(target => !target.closest("[data-bridge-disabled]"))
+      .map((target, index) => {
+        const element = new BridgeElement(target)
+        return { ...element.getButton(), index }
     })
 
     this.send("connect", { buttons }, message => {
       this.clickButton(message)
     })
-  }
-
-  notifyBridgeOfDisconnect() {
-    this.send("disconnect")
   }
 
   clickButton(message) {

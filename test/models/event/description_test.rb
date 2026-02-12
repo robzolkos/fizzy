@@ -1,11 +1,23 @@
 require "test_helper"
 
 class Event::DescriptionTest < ActiveSupport::TestCase
+  test "html description is html safe" do
+    description = events(:logo_published).description_for(users(:david))
+
+    assert_predicate description.to_html, :html_safe?
+  end
+
   test "generates html description for card published event" do
     description = events(:logo_published).description_for(users(:david))
 
     assert_includes description.to_html, "added"
     assert_includes description.to_html, "logo"
+  end
+
+  test "plain text description is not html safe" do
+    description = events(:logo_published).description_for(users(:david))
+
+    assert_not_predicate description.to_plain_text, :html_safe?
   end
 
   test "generates plain text description for card published event" do

@@ -116,35 +116,22 @@
         grid-template-areas:
           "avatars-author text-added"
           "avatars-author text-author"
-          "text-updated text-updated"
-          "text-assignees text-assignees"
-          "avatars-assignees avatars-assignees";
+          "... text-updated"
+          "... text-assignees"
+          "... avatars-assignees";
         grid-template-columns: auto 1fr;
+
+        .card__meta-text {
+          border: 0;
+          padding: 0;
+        }
 
         &:has(.card__meta-avatars--assignees .avatar) {
           &:not(:has(.reaction)) {
             .card__meta-avatars--assignees {
               margin-inline-end: calc(var(--btn-size) + var(--meta-spacer-block));
-              margin-block-start: var(--meta-spacer-block);
             }
           }
-        }
-
-        &:not(:has(.card__meta-avatars--assignees .avatar)) {
-          grid-template-areas:
-            "avatars-author text-added"
-            "avatars-author text-author"
-            "... text-updated"
-            "avatars-assignees text-assignees";
-
-          .card__meta-avatars--assignees {
-            margin-block-start: calc(var(--meta-spacer-block) * -1);
-          }
-        }
-
-        .card__meta-text {
-          border: 0;
-          padding: 0;
         }
 
         .card__meta-text + .card__meta-text {
@@ -155,6 +142,7 @@
 
         .card__meta-avatars--assignees {
           margin-inline-start: unset;
+          margin-block-start: var(--meta-spacer-block);
         }
 
         .card__meta-avatars--author {
@@ -179,16 +167,6 @@
 
       &:has(.card__closed) {
         padding-block-start: 2rem;
-
-        .card__meta-text--assignees {
-          margin-block-start: var(--meta-spacer-block);
-        }
-      }
-
-      &:not(:has(.card__closed), :has(.card__meta-avatars--assignees .avatar)) {
-        .card__meta-text--assignees {
-          margin-block-start: unset;
-        }
       }
     }
 

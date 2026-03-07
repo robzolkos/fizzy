@@ -12,6 +12,6 @@ class Account::EntropiesController < ApplicationController
 
   private
     def entropy_params
-      params.expect(entropy: [ :auto_postpone_period ])
+      params.expect(entropy: [ :auto_postpone_period_in_days ])
     end
 end

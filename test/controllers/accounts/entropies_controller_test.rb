@@ -14,10 +14,10 @@ class Account::EntropiesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "update as JSON" do
-    put account_entropy_path, params: { entropy: { auto_postpone_period: 2.days } }, as: :json
+    put account_entropy_path, params: { entropy: { auto_postpone_period_in_days: 7 } }, as: :json
 
     assert_response :no_content
-    assert_equal 2.days, entropies("37s_account").reload.auto_postpone_period
+    assert_equal 7.days, entropies("37s_account").reload.auto_postpone_period
   end
 
   test "update requires admin" do

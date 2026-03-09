@@ -1,4 +1,6 @@
 class Account::EntropiesController < ApplicationController
+  wrap_parameters :entropy, include: [ :auto_postpone_period_in_days ]
+
   before_action :ensure_admin
 
   def update

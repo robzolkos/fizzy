@@ -1,5 +1,5 @@
 class Boards::EntropiesController < ApplicationController
-  wrap_parameters :board
+  wrap_parameters :board, include: [ :auto_postpone_period_in_days ]
 
   include BoardScoped
 

@@ -27,7 +27,7 @@ class Entropy < ApplicationRecord
   private
     def default_auto_postpone_period_in_days
       if container.is_a?(Board)
-        container.account.auto_postpone_period_in_days
+        container.account.entropy.auto_postpone_period_in_days
       else
         DEFAULT_AUTO_POSTPONE_PERIOD_IN_DAYS
       end

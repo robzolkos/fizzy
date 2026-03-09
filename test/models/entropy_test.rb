@@ -7,6 +7,10 @@ class Entropy::Test < ActiveSupport::TestCase
     end
   end
 
+  test "default auto-postpone period is included in allowed periods" do
+    assert_includes Entropy::AUTO_POSTPONE_PERIODS_IN_DAYS, Entropy::DEFAULT_AUTO_POSTPONE_PERIOD_IN_DAYS
+  end
+
   test "touch cards when entropy changes for account container" do
     account = Current.account
 

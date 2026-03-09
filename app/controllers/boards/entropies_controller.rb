@@ -12,6 +12,8 @@ class Boards::EntropiesController < ApplicationController
       format.turbo_stream
       format.json { head :no_content }
     end
+  rescue ActiveRecord::RecordInvalid
+    head :unprocessable_entity
   end
 
   private

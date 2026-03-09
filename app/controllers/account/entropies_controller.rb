@@ -10,6 +10,8 @@ class Account::EntropiesController < ApplicationController
       format.html { redirect_to account_settings_path, notice: "Account updated" }
       format.json { head :no_content }
     end
+  rescue ActiveRecord::RecordInvalid
+    head :unprocessable_entity
   end
 
   private

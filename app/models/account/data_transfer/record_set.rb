@@ -4,47 +4,14 @@ class Account::DataTransfer::RecordSet
 
   IMPORT_BATCH_SIZE = 100
 
-  IMPORTABLE_MODEL_NAMES = %w[
-    Access
-    Account
-    ActionText::RichText
-    ActiveStorage::Attachment
-    ActiveStorage::Blob
-    Assignment
-    Board
-    Board::Publication
-    Card
-    Card::ActivitySpike
-    Card::Goldness
-    Card::NotNow
-    Closure
-    Column
-    Comment
-    Entropy
-    Event
-    Filter
-    Mention
-    Notification
-    Notification::Bundle
-    Pin
-    Reaction
-    Step
-    Tag
-    Tagging
-    User
-    User::Settings
-    Watch
-    Webhook
-    Webhook::DelinquencyTracker
-    Webhook::Delivery
-  ].freeze
-
+  attr_accessor :importable_model_names
   attr_reader :account, :model, :attributes
 
-  def initialize(account:, model:, attributes: nil)
+  def initialize(account:, model:, attributes: nil, importable_model_names: nil)
     @account = account
     @model = model
     @attributes = (attributes || model.column_names).map(&:to_s)
+    @importable_model_names = importable_model_names || [ model.name ]
   end
 
   def export(to:, start: nil)
@@ -159,7 +126,7 @@ class Account::DataTransfer::RecordSet
     end
 
     def verify_model_type(type_name)
-      if IMPORTABLE_MODEL_NAMES.include?(type_name)
+      if importable_model_names.include?(type_name)
         type_name.constantize
       else
         raise IntegrityError, "Unrecognized model type: #{type_name}"

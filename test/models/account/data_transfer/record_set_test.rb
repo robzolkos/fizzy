@@ -1,10 +1,14 @@
 require "test_helper"
 
 class Account::DataTransfer::RecordSetTest < ActiveSupport::TestCase
+  setup do
+    @importable_model_names = %w[ Card Board Event ]
+  end
+
   test "check rejects polymorphic type not in the importable models allowlist" do
     event_data = build_event_data(eventable_type: "Identity")
 
-    record_set = Account::DataTransfer::RecordSet.new(account: importing_account, model: Event)
+    record_set = Account::DataTransfer::RecordSet.new(account: importing_account, model: Event, importable_model_names: @importable_model_names)
 
     error = assert_raises(Account::DataTransfer::RecordSet::IntegrityError) do
       record_set.check(from: build_reader(dir: "events", data: event_data))
@@ -16,7 +20,7 @@ class Account::DataTransfer::RecordSetTest < ActiveSupport::TestCase
   test "check rejects nonexistent polymorphic type" do
     event_data = build_event_data(eventable_type: "Nonexistent::ClassName")
 
-    record_set = Account::DataTransfer::RecordSet.new(account: importing_account, model: Event)
+    record_set = Account::DataTransfer::RecordSet.new(account: importing_account, model: Event, importable_model_names: @importable_model_names)
 
     error = assert_raises(Account::DataTransfer::RecordSet::IntegrityError) do
       record_set.check(from: build_reader(dir: "events", data: event_data))
@@ -28,7 +32,7 @@ class Account::DataTransfer::RecordSetTest < ActiveSupport::TestCase
   test "check rejects non-ActiveRecord class used as polymorphic type" do
     event_data = build_event_data(eventable_type: "ActiveSupport::BroadcastLogger")
 
-    record_set = Account::DataTransfer::RecordSet.new(account: importing_account, model: Event)
+    record_set = Account::DataTransfer::RecordSet.new(account: importing_account, model: Event, importable_model_names: @importable_model_names)
 
     error = assert_raises(Account::DataTransfer::RecordSet::IntegrityError) do
       record_set.check(from: build_reader(dir: "events", data: event_data))
@@ -40,7 +44,7 @@ class Account::DataTransfer::RecordSetTest < ActiveSupport::TestCase
   test "check accepts polymorphic type in the importable models allowlist" do
     event_data = build_event_data(eventable_type: "Card")
 
-    record_set = Account::DataTransfer::RecordSet.new(account: importing_account, model: Event)
+    record_set = Account::DataTransfer::RecordSet.new(account: importing_account, model: Event, importable_model_names: @importable_model_names)
 
     assert_nothing_raised do
       record_set.check(from: build_reader(dir: "events", data: event_data))

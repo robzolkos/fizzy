@@ -75,7 +75,7 @@ __Request:__
 ```json
 {
   "board": {
-    "name": "My new board",
+    "name": "My new board"
   }
 }
 ```

@@ -6,6 +6,8 @@ An Identity represents a person using Fizzy.
 
 Returns a list of accounts the identity has access to, including the user for each account.
 
+__Response:__
+
 ```json
 {
   "accounts": [

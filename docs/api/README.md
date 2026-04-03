@@ -18,6 +18,7 @@ a bot to perform various actions for you.
 - [Tags](sections/tags.md)
 - [Users](sections/users.md)
 - [Notifications](sections/notifications.md)
+- [Rich Text](sections/rich_text.md)
 - [Webhooks](sections/webhooks.md)
 
 ## Authentication

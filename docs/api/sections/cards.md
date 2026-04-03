@@ -69,7 +69,7 @@ __Response:__
     },
     "comments_url": "http://fizzy.localhost:3006/897362094/cards/4/comments",
     "reactions_url": "http://fizzy.localhost:3006/897362094/cards/4/reactions"
-  },
+  }
 ]
 ```
 

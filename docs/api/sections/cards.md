@@ -16,6 +16,7 @@ __Query Parameters:__
 | `creator_ids[]` | Filter by card creator ID(s) |
 | `closer_ids[]` | Filter by user ID(s) who closed the cards |
 | `card_ids[]` | Filter to specific card ID(s) |
+| `filter_id` | Apply one of your saved personal custom views |
 | `indexed_by` | Filter by: `all` (default), `closed`, `not_now`, `stalled`, `postponing_soon`, `golden` |
 | `sorted_by` | Sort order: `latest` (default), `newest`, `oldest` |
 | `assignment_status` | Filter by assignment status: `unassigned` |

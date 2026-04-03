@@ -18,6 +18,7 @@ a bot to perform various actions for you.
 - [Tags](sections/tags.md)
 - [Users](sections/users.md)
 - [Activities](sections/activities.md)
+- [Filters](sections/filters.md)
 - [Notifications](sections/notifications.md)
 - [Rich Text](sections/rich_text.md)
 - [Exports](sections/exports.md)

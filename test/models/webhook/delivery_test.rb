@@ -68,6 +68,22 @@ class Webhook::DeliveryTest < ActiveSupport::TestCase
     assert_nil delivery.sanitized_request
   end
 
+  test "response_summary returns code and error" do
+    delivery = webhook_deliveries(:successfully_completed)
+    delivery.update!(response: { code: 200, error: nil })
+
+    result = delivery.response_summary
+    assert_equal 200, result[:code]
+    assert_nil result[:error]
+  end
+
+  test "response_summary returns nil when response is blank" do
+    delivery = webhook_deliveries(:pending)
+    delivery.update_columns(response: nil)
+
+    assert_nil delivery.response_summary
+  end
+
   test "deliver_later" do
     delivery = webhook_deliveries(:pending)
 

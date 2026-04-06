@@ -50,6 +50,12 @@ class Webhook::Delivery < ApplicationRecord
     end
   end
 
+  def response_summary
+    if response.present?
+      { code: response[:code], error: response[:error] }
+    end
+  end
+
   def failed?
     (errored? || completed?) && !succeeded?
   end

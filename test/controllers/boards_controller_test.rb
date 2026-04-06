@@ -217,6 +217,19 @@ class BoardsControllerTest < ActionDispatch::IntegrationTest
     assert_equal users(:kevin).boards.count, @response.parsed_body.count
   end
 
+  test "index as JSON includes public_description fields for published boards" do
+    board = boards(:writebook)
+    board.publish
+    board.update!(public_description: "<p>Public board description.</p>")
+
+    get boards_path, as: :json
+    assert_response :success
+
+    published_board = @response.parsed_body.find { |b| b["id"] == board.id }
+    assert_equal board.public_description.to_plain_text, published_board["public_description"]
+    assert_equal board.public_description.to_s, published_board["public_description_html"]
+  end
+
   test "index as JSON paginates and preserves recently-accessed order" do
     account = accounts("37s")
     kevin = users(:kevin)

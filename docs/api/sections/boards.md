@@ -63,7 +63,7 @@ __Response:__
 }
 ```
 
-The `public_url` field is only present when the board is published. The `user_ids` field is only present when `all_access` is `false`; use `GET /:account_slug/users` to resolve those IDs to user records if needed.
+The `public_description`, `public_description_html`, and `public_url` fields are only present when the board is published. The `user_ids` field is only present when `all_access` is `false`; use `GET /:account_slug/users` to resolve those IDs to user records if needed.
 
 ## `POST /:account_slug/boards`
 

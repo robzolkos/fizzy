@@ -261,14 +261,26 @@ class BoardsControllerTest < ActionDispatch::IntegrationTest
     assert_equal boards(:writebook).auto_postpone_period_in_days, @response.parsed_body["auto_postpone_period_in_days"]
   end
 
-  test "show as JSON includes public_description fields" do
+  test "show as JSON includes public_description fields when published" do
     board = boards(:writebook)
+    board.publish
     board.update!(public_description: "<p>This is a <strong>public</strong> note.</p>")
 
     get board_path(board), as: :json
     assert_response :success
     assert_equal board.public_description.to_plain_text, @response.parsed_body["public_description"]
     assert_equal board.public_description.to_s, @response.parsed_body["public_description_html"]
+  end
+
+  test "show as JSON excludes public_description fields when not published" do
+    board = boards(:writebook)
+    board.update!(public_description: "<p>This is a <strong>public</strong> note.</p>")
+    assert_not board.published?
+
+    get board_path(board), as: :json
+    assert_response :success
+    assert_nil @response.parsed_body["public_description"]
+    assert_nil @response.parsed_body["public_description_html"]
   end
 
   test "show as JSON includes granted user_ids when board is not all access" do

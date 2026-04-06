@@ -3,14 +3,7 @@ json.cache! delivery do
   json.created_at delivery.created_at.utc
   json.updated_at delivery.updated_at.utc
 
-  request_headers = delivery.request&.dig("headers")&.except("X-Webhook-Signature")
-  if request_headers.present?
-    json.request do
-      json.headers request_headers
-    end
-  else
-    json.request nil
-  end
+  json.request delivery.sanitized_request
 
   response = delivery.response&.with_indifferent_access
   if response.present?

@@ -44,6 +44,12 @@ class Webhook::Delivery < ApplicationRecord
     raise
   end
 
+  def sanitized_request
+    if headers = request&.dig("headers")&.except("X-Webhook-Signature")
+      { headers: headers }
+    end
+  end
+
   def failed?
     (errored? || completed?) && !succeeded?
   end

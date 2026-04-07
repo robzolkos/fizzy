@@ -1,19 +1,19 @@
-# Events
+# Activities
 
-Events are the activity stream for an account — a record of significant actions like cards being published, assigned, closed, and commented on.
+Activities are the activity stream for an account — a record of significant actions like cards being published, assigned, closed, and commented on.
 
-## `GET /:account_slug/events`
+## `GET /:account_slug/activities`
 
-Returns a paginated flat list of events the current user can access, sorted newest first.
+Returns a paginated flat list of activities the current user can access, sorted newest first.
 
 __Query Parameters:__
 
 | Parameter | Description |
 |-----------|-------------|
-| `creator_ids[]` | Filter to events created by specific user ID(s). Multiple values are ORed. |
-| `board_ids[]` | Filter to events on specific board ID(s). Multiple values are ORed. |
+| `creator_ids[]` | Filter to activities created by specific user ID(s). Multiple values are ORed. |
+| `board_ids[]` | Filter to activities on specific board ID(s). Multiple values are ORed. |
 
-Different filter params are ANDed together: `creator_ids[]=A&board_ids[]=X` means events created by A on board X.
+Different filter params are ANDed together: `creator_ids[]=A&board_ids[]=X` means activities created by A on board X.
 
 To fetch activity for a specific user, use `creator_ids[]=USER_ID`.
 
@@ -49,11 +49,11 @@ __`particulars` examples:__
 
 The practical `eventable_type` values are `Card` and `Comment`. Clients should handle unknown future values conservatively.
 
-Events whose underlying `Card` or `Comment` has been deleted or is inaccessible to the current user are omitted from the feed. The endpoint never returns `eventable: null`.
+Activities whose underlying `Card` or `Comment` has been deleted or is inaccessible to the current user are omitted from the feed. The endpoint never returns `eventable: null`.
 
-The top-level `board` field reflects the event's current board association. If a card moves boards, all its events move with it for the purposes of this feed and `board_ids[]` filtering.
+The top-level `board` field reflects the activity's current board association. If a card moves boards, all its activities move with it for the purposes of this feed and `board_ids[]` filtering.
 
-This endpoint is a paginated activity feed, not an immutable audit-log. `description`, `eventable`, `board`, and `creator` may reflect current resource state. Re-fetch recent pages to get fresh event bodies.
+This endpoint is a paginated activity feed, not an immutable audit-log. `description`, `eventable`, `board`, and `creator` may reflect current resource state. Re-fetch recent pages to get fresh activity data.
 
 __Response:__
 

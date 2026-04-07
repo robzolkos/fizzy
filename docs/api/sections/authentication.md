@@ -202,7 +202,7 @@ Note: The raw token value is only returned once at creation time and cannot be r
 curl -X DELETE \
   -H "Authorization: Bearer put-your-access-token-here" \
   -H "Accept: application/json" \
-  https://app.fizzy.do/my/access_tokens/:access_token_id
+  https://app.fizzy.do/my/access_tokens/:id
 ```
 
 __Response:__

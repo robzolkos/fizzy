@@ -5,7 +5,7 @@ class Boards::AccessesControllerTest < ActionDispatch::IntegrationTest
     sign_in_as :kevin
   end
 
-  test "index returns all active account users with access status" do
+  test "index returns active account users with access status" do
     board = boards(:writebook)
 
     get board_accesses_path(board), as: :json
@@ -69,4 +69,37 @@ class Boards::AccessesControllerTest < ActionDispatch::IntegrationTest
     get board_accesses_path(board), as: :json
     assert_response :success
   end
+
+  test "index paginates account users" do
+    account = accounts("37s")
+    board = boards(:private)
+
+    200.times do |index|
+      identity = Identity.create!(email_address: "board-membership-#{index}@example.com")
+      account.users.create!(identity: identity, name: "Board Membership User #{index}", role: :member)
+    end
+
+    expected_ids = account.users.active.alphabetically.pluck(:id)
+    actual_ids = []
+    next_page = board_accesses_path(board, format: :json)
+    page_count = 0
+
+    while next_page
+      get next_page, as: :json
+      assert_response :success
+
+      page_count += 1
+      actual_ids.concat(@response.parsed_body["users"].map { |user| user["id"] })
+      next_page = next_page_from_link_header(@response.headers["Link"])
+    end
+
+    assert_equal expected_ids, actual_ids
+    assert_operator page_count, :>, 1
+  end
+
+  private
+    def next_page_from_link_header(link_header)
+      url = link_header&.match(/<([^>]+)>;\s*rel="next"/)&.captures&.first
+      URI.parse(url).request_uri if url
+    end
 end

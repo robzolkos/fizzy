@@ -142,7 +142,7 @@ Board accesses let you see who has access to a board and their involvement level
 
 ### `GET /:account_slug/boards/:board_id/accesses`
 
-Returns all active account users with their access status for the specified board.
+Returns a paginated list of active account users with their access status for the specified board.
 
 __Response:__
 
@@ -182,6 +182,7 @@ __Response:__
 - `has_access` indicates whether the user has access to the board
 - `involvement` is `"watching"`, `"access_only"`, or `null` (when the user does not have access)
 - When `all_access` is `true`, all active account users have access to the board
+- The `users` array contains the current page of results; if there are more users, follow the `Link` response header with `rel="next"`
 
 To change who has access, use `PUT /:account_slug/boards/:board_id` with the `user_ids` parameter.
 

@@ -2,12 +2,12 @@ class Boards::AccessesController < ApplicationController
   include BoardScoped
 
   def index
-    @users = @board.account.users.active.alphabetically.includes(:identity)
+    set_page_and_extract_portion_from @board.account.users.active.alphabetically.includes(:identity)
   end
 
   private
     def involvement_by_user
-      @involvement_by_user ||= @board.accesses.pluck(:user_id, :involvement).to_h
+      @involvement_by_user ||= @board.accesses.where(user_id: @page.records.map(&:id)).pluck(:user_id, :involvement).to_h
     end
 
     helper_method :involvement_by_user

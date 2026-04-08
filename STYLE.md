@@ -96,6 +96,34 @@ class SomeClass
 end
 ```
 
+## Prefer `unless` over `!if`
+
+We prefer `unless` over negated `if` conditions. It reads more naturally in English.
+
+```ruby
+# Bad
+if !user.admin?
+  redirect_to root_path
+end
+
+# Good
+unless user.admin?
+  redirect_to root_path
+end
+```
+
+For single-line statements, the same applies:
+
+```ruby
+# Bad
+do_something if !condition
+
+# Good
+do_something unless condition
+```
+
+Note: avoid `unless` with `else` or complex compound conditions — use `if` instead when negation would make the logic harder to follow.
+
 ## To bang or not to bang
 
 Should I call a method `do_something` or `do_something!`?

@@ -1,6 +1,8 @@
 require "test_helper"
 
 class NotificationDeliveryTest < ActiveSupport::TestCase
+  PUBLIC_TEST_IP = "142.250.185.206"
+
   setup do
     @assigner = users(:david)
     @assignee = users(:kevin)
@@ -15,6 +17,8 @@ class NotificationDeliveryTest < ActiveSupport::TestCase
     Notification.push_targets = []
     Notification.register_push_target(:web)
     Notification.register_push_target(push_target_with_tracking)
+
+    stub_dns_resolution(PUBLIC_TEST_IP)
 
     # Give assignee a web push subscription
     @assignee.push_subscriptions.create!(

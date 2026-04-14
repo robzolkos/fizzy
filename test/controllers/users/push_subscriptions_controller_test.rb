@@ -3,7 +3,7 @@ require "test_helper"
 class Users::PushSubscriptionsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in_as :david
-    stub_fcm_dns_resolution
+    stub_web_push_dns_resolution
   end
 
   test "create new push subscription" do

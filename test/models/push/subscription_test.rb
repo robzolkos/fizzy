@@ -2,7 +2,7 @@ require "test_helper"
 
 class Push::SubscriptionTest < ActiveSupport::TestCase
   setup do
-    stub_fcm_dns_resolution
+    stub_web_push_dns_resolution
   end
 
   test "valid subscription with permitted endpoint" do
@@ -90,7 +90,7 @@ class Push::SubscriptionTest < ActiveSupport::TestCase
       auth_key: "test_auth"
     )
 
-    assert_equal DnsTestHelper::FCM_PUBLIC_TEST_IP, subscription.resolved_endpoint_ip
+    assert_equal DnsTestHelper::WEB_PUSH_PUBLIC_TEST_IP, subscription.resolved_endpoint_ip
   end
 
   test "accepts all permitted push service domains" do

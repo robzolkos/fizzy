@@ -1,5 +1,5 @@
 module DnsTestHelper
-  FCM_PUBLIC_TEST_IP = "142.250.185.206" # stable public IP for FCM DNS stubs in tests
+  WEB_PUSH_PUBLIC_TEST_IP = "142.250.185.206" # stable public IP for web push DNS stubs in tests
 
   private
 
@@ -9,7 +9,7 @@ module DnsTestHelper
     Resolv::DNS.stubs(:open).yields(dns_mock)
   end
 
-  def stub_fcm_dns_resolution
-    stub_dns_resolution(FCM_PUBLIC_TEST_IP)
+  def stub_web_push_dns_resolution
+    stub_dns_resolution(WEB_PUSH_PUBLIC_TEST_IP)
   end
 end

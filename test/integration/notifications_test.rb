@@ -1,10 +1,6 @@
 require "test_helper"
 
 class NotificationDeliveryTest < ActiveSupport::TestCase
-  # Use a stable, publicly-routable IP so DNS stubbing satisfies public-host/SSRF
-  # validation for the FCM endpoint and remains deterministic across runs.
-  FCM_PUBLIC_TEST_IP = "142.250.185.206"
-
   setup do
     @assigner = users(:david)
     @assignee = users(:kevin)
@@ -20,7 +16,7 @@ class NotificationDeliveryTest < ActiveSupport::TestCase
     Notification.register_push_target(:web)
     Notification.register_push_target(push_target_with_tracking)
 
-    stub_dns_resolution(FCM_PUBLIC_TEST_IP)
+    stub_fcm_dns_resolution
 
     # Give assignee a web push subscription
     @assignee.push_subscriptions.create!(

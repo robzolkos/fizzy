@@ -152,6 +152,8 @@ Returns `200 OK` with the updated board in the same shape as `GET /:account_slug
 }
 ```
 
+If the update succeeds but removes the requesting user's own access to the board, the endpoint instead returns `204 No Content`.
+
 ## `DELETE /:account_slug/boards/:board_id`
 
 Deletes a Board. Only board administrators can delete a board.

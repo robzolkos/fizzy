@@ -50,7 +50,13 @@ class BoardsController < ApplicationController
           redirect_to root_path, notice: "Saved (you were removed from the board)"
         end
       end
-      format.json { render :show }
+      format.json do
+        if @board.accessible_to?(Current.user)
+          render :show
+        else
+          head :forbidden
+        end
+      end
     end
   end
 

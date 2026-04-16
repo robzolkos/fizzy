@@ -50,7 +50,7 @@ class BoardsController < ApplicationController
           redirect_to root_path, notice: "Saved (you were removed from the board)"
         end
       end
-      format.json { head :no_content }
+      format.json { render :show }
     end
   end
 

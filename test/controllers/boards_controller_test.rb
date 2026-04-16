@@ -353,7 +353,7 @@ class BoardsControllerTest < ActionDispatch::IntegrationTest
     assert_equal board.creator.id, json["creator"]["id"]
   end
 
-  test "update as JSON returns forbidden when user removes themselves from board" do
+  test "update as JSON returns no content when user removes themselves from board" do
     board = boards(:writebook)
 
     put board_path(board), params: {
@@ -361,7 +361,7 @@ class BoardsControllerTest < ActionDispatch::IntegrationTest
       user_ids: users(:david, :jz).pluck(:id)
     }, as: :json
 
-    assert_response :forbidden
+    assert_response :no_content
     assert_equal "Updated Name", board.reload.name
     assert_not board.users.include?(users(:kevin))
     assert_empty response.body

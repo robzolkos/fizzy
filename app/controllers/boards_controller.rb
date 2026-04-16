@@ -54,7 +54,7 @@ class BoardsController < ApplicationController
         if @board.accessible_to?(Current.user)
           render :show
         else
-          head :forbidden
+          head :no_content
         end
       end
     end
